@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #FFEFD5;
+}
+
+h1 {
+  font-size: 38px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+.ingredients-list {
+  list-style: square inside;
+}
+
+ol {
+  list-style: decimal;
+  padding-left: 40px;
+}
+
+header > img {
+  width: 100px;
+}
+
+ul > li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.user_review {
+  font-size: 20px;
+  font-family: "Comic Sans MS";
+}
+
+.user_review > h4 {
+  font-size: 30px;
+  font-weight: bold;
+}
