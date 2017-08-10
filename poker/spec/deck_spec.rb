@@ -1,7 +1,7 @@
 require 'deck'
 
 describe Deck do
-  subject(:deck) {Deck.new}
+  subject(:deck) { Deck.new }
 
   context "at creation" do
     it "initializes with 52 cards" do
@@ -21,11 +21,57 @@ describe Deck do
   end
 
   context "during game" do
-    it "should be drawn from"
 
-    it 'should be able to draw more than one card'
+    context "#draw" do
+      before(:each) do
+        let(:new_card) { deck.draw! }
+      end
 
-    it "should be randomized after each hand"
+      it "should be drawn from" do
+        expect(deck.bank.length).to eq(51)
+      end
+
+      it "should return an array when drawn from" do
+        expect(new_card).to be_a(Array)
+      end
+
+      it "should be an array of one card by default" do
+        expect(new_card.length).to eq(1)
+      end
+
+      it "should be able to have more than one card drawn from it" do
+        new_cards = deck.draw!(5)
+        expect(new_cards.length).to eq(5)
+        expect(deck.bank.length).to eq(47)
+      end
+
+
+      it "should remove the drawn cards from the bank" do
+        new_cards = deck.draw!(4)
+        expect(new_cards.any? { |card| deck.bank.include?(card) }).to be false
+      end
+
+      it "draw unique cards" do
+        new_cards = deck.draw!(20)
+        expect(new_cards.all? { |card| new_cards.count(card) == 1 }).to be true
+      end
+    end
+
+    it "should be drawn from" do
+      new_card = deck.draw!
+      expect(new_card).to be_a(Array)
+      expect(new_card.length).to eq(1)
+      expect(deck.bank.length).to eq(51)
+    end
+
+    context "#shuffle" do
+      it "should randomize the deck" do
+        bank = deck.bank
+        deck.shuffle!
+        expect(deck.bank).to_not eq(bank)
+      end
+
+    end
 
   end
 
