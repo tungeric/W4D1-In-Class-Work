@@ -23,11 +23,10 @@ describe Deck do
   context "during game" do
 
     context "#draw" do
-      before(:each) do
-        let(:new_card) { deck.draw! }
-      end
+      let(:new_card) { deck.draw! }
 
       it "should be drawn from" do
+        new_card
         expect(deck.bank.length).to eq(51)
       end
 
@@ -44,7 +43,6 @@ describe Deck do
         expect(new_cards.length).to eq(5)
         expect(deck.bank.length).to eq(47)
       end
-
 
       it "should remove the drawn cards from the bank" do
         new_cards = deck.draw!(4)
@@ -66,7 +64,7 @@ describe Deck do
 
     context "#shuffle" do
       it "should randomize the deck" do
-        bank = deck.bank
+        bank = deck.bank.dup
         deck.shuffle!
         expect(deck.bank).to_not eq(bank)
       end

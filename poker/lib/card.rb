@@ -18,18 +18,27 @@ class Card
     A: 14
   }
 
+  SUIT_MAP = { spade: "♠️", heart: "♥️", diamond: "♦️", club: "♣️" }
+
   def initialize(suit, val)
     @suit = suit
     @value = val
   end
 
   def <=>(comparator)
-    CARD_RANKING[@value] <=> CARD_RANKING[comparator.value]
+    [CARD_RANKING[@value], @suit] <=> [CARD_RANKING[comparator.value], comparator.suit]
+  end
+
+  def compare_values(comparator)
+
+  end
+
+  def compare_suit(comparator)
+
   end
 
   def to_s
-    suit_map = { spade: "♠️", heart: "♥️", diamond: "♦️", club: "♣️" }
-    suit = suit_map[@suit]
+    suit = SUIT_MAP[@suit]
     value = @value.to_s
     suit + " " + value
   end
