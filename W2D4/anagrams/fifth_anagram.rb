@@ -10,5 +10,5 @@ def fifth_anagram(str1, str2)
 end
 
 if __FILE__ == $0
-  p fifth_anagram("elvis", "lives")
+  p fifth_anagram("elvistt", "livesss")
 end
