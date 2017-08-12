@@ -30,7 +30,6 @@ class HashSet
   private
 
   def [](key)
-
     @store[key.hash % num_buckets]
   end
 
