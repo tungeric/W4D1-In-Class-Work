@@ -1,0 +1,4 @@
+class ModelBase
+
+
+end
