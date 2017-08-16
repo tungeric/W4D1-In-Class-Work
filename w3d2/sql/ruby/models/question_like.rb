@@ -25,7 +25,7 @@ class QuestionLike
       WHERE
         liker_user_id = ?
     SQL
-    data.map { |d| QuestionFollow.new(d) }
+    data.map { |d| QuestionLike.new(d) }
   end
 
   def self.find_by_liked_question_id(liked_question_id)
@@ -37,7 +37,7 @@ class QuestionLike
       WHERE
         liked_question_id = ?
     SQL
-    data.map { |d| QuestionFollow.new(d) }
+    data.map { |d| QuestionLike.new(d) }
   end
 
   def initialize(options)

@@ -5,7 +5,7 @@ class QuestionsDatabase < SQLite3::Database
   include Singleton
 
   def initialize
-    super('questions.db')
+    super('/Users/appacademy/Desktop/w3d2/w3d2/sql/questions.db')
     self.type_translation = true
     self.results_as_hash = true
   end

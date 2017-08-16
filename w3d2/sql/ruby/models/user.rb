@@ -36,6 +36,18 @@ class User
     @id = options['id']
   end
 
+  def authored_questions
+    Question.find_by_author_user_id(@id)
+  end
+
+  def authored_replies
+    Reply.find_by_author_user_id(@id)
+  end
+
+  def followed_questions
+    Question.followed_questions_for_user_id(@id)
+  end
+
 
 
 end
