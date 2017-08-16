@@ -1,4 +1,5 @@
 require_relative '../questions_database.rb'
+require_relative 'question'
 
 class QuestionFollow
 
@@ -68,6 +69,26 @@ class QuestionFollow
         q.user_id = f.user_id
       WHERE
         q.user_id = ?
+    SQL
+    data.map { |d| Question.new(d) }
+  end
+
+  def self.most_followed_questions(n)
+    data = QuestionsDatabase.instance.execute(<<-SQL, n)
+      SELECT
+        q.*
+      FROM
+        questions q
+      LEFT JOIN
+        question_follows f
+      ON
+        q.id = f.question_id
+      GROUP BY
+        q.id
+      ORDER BY
+        COUNT(f.question_id) DESC
+      LIMIT
+        ?
     SQL
     data.map { |d| Question.new(d) }
   end

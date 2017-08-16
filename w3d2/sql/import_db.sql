@@ -10,7 +10,12 @@ INSERT INTO
   users (f_name, l_name)
 VALUES
   ("Drew", "Stonebraker"),
-  ("Dylan", "Caldwell");
+  ("Dylan", "Caldwell"),
+  ("Clark", "Kent"),
+  ("Bruce", "Wayne"),
+  ("Tony", "Stark"),
+  ("Peter", "Parker"),
+  ("Mr", "Incredible");
 
 DROP TABLE IF EXISTS questions;
 
@@ -28,7 +33,10 @@ INSERT INTO
 VALUES
   ("I have a question", "This is my question", 1),
   ("This is my question title 1", "This is my question body 1", 2),
-  ("This is my question title 2", "This is my question body 2", 2);
+  ("This is my question title 2", "This is my question body 2", 2),
+  ("This is my question title 3", "This is my question body 3", 2),
+  ("This is my question title 4", "This is my question body 4", 2),
+  ("This is my question title 5", "This is my question body 5", 2);
 
 DROP TABLE IF EXISTS question_follows;
 
@@ -47,7 +55,18 @@ VALUES
   (2,1),
   (2,2),
   (2,3),
-  (1,1);
+  (1,1),
+  (3,1),
+  (4,1),
+  (4,2),
+  (5,1),
+  (6,2),
+  (6,3),
+  (5,3),
+  (4,3),
+  (7,1),
+  (7,3),
+  (7,2);
 
 DROP TABLE IF EXISTS replies;
 
