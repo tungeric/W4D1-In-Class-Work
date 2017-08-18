@@ -65,7 +65,7 @@ class SQLObject
         #{self.table_name}.id = ?
     SQL
 
-    self.new(data.first)
+    data.empty? ? nil : self.new(data.first)
   end
 
   def initialize(params = {})
@@ -89,11 +89,21 @@ class SQLObject
   end
 
   def attribute_values
-    # ...
+    self.class.columns.map { |col| self.send(col) }
   end
 
   def insert
-    # ...
+    columns = self.class.columns.join(", ")
+    interps = (['?'] * self.class.columns.length).join(", ")
+
+    DBConnection.execute(<<-SQL, *attribute_values)
+      INSERT INTO
+        #{self.class.table_name} (#{columns})
+      VALUES
+        (#{interps})
+    SQL
+
+    attributes[:id] = DBConnection.last_insert_row_id
   end
 
   def update
