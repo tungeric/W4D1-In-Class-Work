@@ -107,7 +107,19 @@ class SQLObject
   end
 
   def update
-    # ...
+    sets = self.class.columns.map do |col|
+      "#{col} = ?"
+    end
+    sets = sets.join(", ")
+
+    DBConnection.execute(<<-SQL, *attribute_values, attributes[:id])
+      UPDATE
+        #{self.class.table_name}
+      SET
+        #{sets}
+      WHERE
+        #{self.class.table_name}.id = ?
+    SQL
   end
 
   def save
