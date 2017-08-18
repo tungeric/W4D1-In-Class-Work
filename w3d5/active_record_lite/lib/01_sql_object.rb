@@ -6,7 +6,7 @@ require 'active_support/inflector'
 class SQLObject
   def self.columns
     return @columns if @columns
-    table_name = self.table_name
+
     data = DBConnection.execute2(<<-SQL)
       SELECT
         *
@@ -43,9 +43,9 @@ class SQLObject
   def self.all
     data = DBConnection.execute(<<-SQL)
       SELECT
-        #{self.table_name}.*
+        #{table_name}.*
       FROM
-        #{self.table_name}
+        #{table_name}
     SQL
 
     self.parse_all(data)
@@ -58,11 +58,11 @@ class SQLObject
   def self.find(id)
     data = DBConnection.execute(<<-SQL, id)
       SELECT
-        #{self.table_name}.*
+        #{table_name}.*
       FROM
-        #{self.table_name}
+        #{table_name}
       WHERE
-        #{self.table_name}.id = ?
+        #{table_name}.id = ?
     SQL
 
     data.empty? ? nil : self.new(data.first)
@@ -98,7 +98,7 @@ class SQLObject
 
     DBConnection.execute(<<-SQL, *attribute_values)
       INSERT INTO
-        #{self.class.table_name} (#{columns})
+        #{table_name} (#{columns})
       VALUES
         (#{interps})
     SQL
@@ -114,15 +114,19 @@ class SQLObject
 
     DBConnection.execute(<<-SQL, *attribute_values, attributes[:id])
       UPDATE
-        #{self.class.table_name}
+        #{table_name}
       SET
         #{sets}
       WHERE
-        #{self.class.table_name}.id = ?
+        #{table_name}.id = ?
     SQL
   end
 
   def save
     attributes[:id] ? update : insert
+  end
+
+  def table_name
+    self.class.table_name
   end
 end
