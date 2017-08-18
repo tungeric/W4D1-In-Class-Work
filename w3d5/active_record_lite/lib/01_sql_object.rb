@@ -37,7 +37,7 @@ class SQLObject
   end
 
   def self.table_name
-    @table_name || ActiveSupport::Inflector.tableize(self.to_s)
+    @table_name || self.to_s.tableize
   end
 
   def self.all
