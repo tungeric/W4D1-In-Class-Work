@@ -45,7 +45,17 @@ class SQLObject
   end
 
   def attributes
-    # ...
+    # return @attributes = {} if @attributes.nil?
+    #
+    # self.class.columns.each do |col|
+    #
+    #   (@attributes || @attributes = {}).merge({
+    #     col => instance_variable_get("@#{col}")
+    #     })
+    # end
+    # @attributes
+
+    @attributes ||= {}
   end
 
   def attribute_values
