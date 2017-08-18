@@ -20,13 +20,23 @@ end
 
 class BelongsToOptions < AssocOptions
   def initialize(name, options = {})
-    # ...
+    inflector = ActiveSupport::Inflector
+    @foreign_key = options[:foreign_key] ||
+      "#{inflector.underscore(name)}_id".to_sym
+    @primary_key = options[:primary_key] || :id
+    @class_name = options[:class_name] ||
+      inflector.camelize(name)
   end
 end
 
 class HasManyOptions < AssocOptions
   def initialize(name, self_class_name, options = {})
-    # ...
+    inflector = ActiveSupport::Inflector
+    @foreign_key = options[:foreign_key] ||
+      "#{inflector.underscore(self_class_name)}_id".to_sym
+    @primary_key = options[:primary_key] || :id
+    @class_name = options[:class_name] ||
+      inflector.singularize(inflector.camelize(name))
   end
 end
 
