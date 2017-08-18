@@ -18,6 +18,18 @@ class SQLObject
   end
 
   def self.finalize!
+    self.columns.each do |col|
+      # getter
+      define_method(col) do
+        attributes[col]
+      end
+
+      #setter
+      define_method("#{col}=") do |new_val|
+        attributes[col] = new_val
+      end
+
+    end
   end
 
   def self.table_name=(table_name)
@@ -45,16 +57,6 @@ class SQLObject
   end
 
   def attributes
-    # return @attributes = {} if @attributes.nil?
-    #
-    # self.class.columns.each do |col|
-    #
-    #   (@attributes || @attributes = {}).merge({
-    #     col => instance_variable_get("@#{col}")
-    #     })
-    # end
-    # @attributes
-
     @attributes ||= {}
   end
 
