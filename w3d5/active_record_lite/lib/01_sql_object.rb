@@ -123,6 +123,6 @@ class SQLObject
   end
 
   def save
-    # ...
+    attributes[:id] ? update : insert
   end
 end
