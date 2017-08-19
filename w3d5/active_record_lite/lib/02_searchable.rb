@@ -1,10 +1,10 @@
 require_relative 'db_connection'
 require_relative '01_sql_object'
+require_relative 'relation'
 
 module Searchable
   def where(params)
     where_line = params.keys.map { |col| "#{table_name}.#{col} = ?"}.join(" AND ")
-    p "****where_line:", where_line
     values = params.values
 
     data = DBConnection.execute(<<-SQL, *values)
@@ -16,7 +16,7 @@ module Searchable
         #{where_line}
     SQL
 
-    data.map{ |datum| self.new(datum) }
+    Relation.new(data.map{ |datum| self.new(datum) })
   end
 end
 

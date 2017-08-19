@@ -1,7 +1,6 @@
 require_relative 'db_connection'
+require_relative 'relation'
 require 'active_support/inflector'
-# NB: the attr_accessor we wrote in phase 0 is NOT used in the rest
-# of this project. It was only a warm up.
 
 class SQLObject
   def self.columns
@@ -48,7 +47,7 @@ class SQLObject
         #{table_name}
     SQL
 
-    self.parse_all(data)
+    Relation.new(self.parse_all(data))
   end
 
   def self.parse_all(results)
