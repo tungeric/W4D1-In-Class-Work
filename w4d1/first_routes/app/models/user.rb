@@ -32,4 +32,9 @@ class User < ApplicationRecord
   has_many :viewers,
     through: :artworks,
     source: :shared_viewers
+
+  has_many :comments,
+    primary_key: :id,
+    foreign_key: :author_id,
+    class_name: :Comment
 end
