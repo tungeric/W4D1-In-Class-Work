@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
   def index
-    # debugger
     @users = User.all
 
     if params[:query]

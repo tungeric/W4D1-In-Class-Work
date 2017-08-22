@@ -33,8 +33,8 @@ class User < ApplicationRecord
     through: :artworks,
     source: :shared_viewers
 
-  has_many :comments,
+  has_many :likes,
     primary_key: :id,
-    foreign_key: :author_id,
-    class_name: :Comment
+    foreign_key: :liker_id,
+    class_name: :Like
 end
