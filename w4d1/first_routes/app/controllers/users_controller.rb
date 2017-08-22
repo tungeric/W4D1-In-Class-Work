@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
 
   def index
+    # debugger
     @users = User.all
+
+    if params[:query]
+      @users = @users.where("LOWER(users.username) LIKE '%#{params[:query].downcase}%'")
+    end
 
     render json: @users
   end
